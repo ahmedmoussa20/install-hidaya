@@ -4,35 +4,45 @@
   <meta charset="UTF-8" />
   <title>تحميل تطبيق هداية</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
 
   <!-- Cairo Bold -->
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
 
   <script>
-    function redirectUser() {
+    document.addEventListener("DOMContentLoaded", function () {
+
       var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
       var androidLink = "https://play.google.com/store/apps/details?id=com.hidayaksa";
       var iosLink = "https://apps.apple.com/us/app/%D9%82%D8%B1%D8%A2%D9%86-%D9%87%D8%AF%D8%A7%D9%8A%D8%A9-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9/id6745518467";
 
-      if (/android/i.test(userAgent)) {
-        window.location.replace(androidLink);
+      function redirect(link) {
+        setTimeout(function () {
+          window.location.replace(link);
+        }, 400);
       }
-      else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        window.location.replace(iosLink);
+
+      if (/android/i.test(userAgent)) {
+        redirect(androidLink);
+      }
+      else if (
+        /iPhone|iPad|iPod/.test(userAgent) ||
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+      ) {
+        redirect(iosLink);
       }
       else {
         document.getElementById("buttons").style.display = "block";
       }
-    }
 
-    window.onload = redirectUser;
+    });
   </script>
 
   <style>
     body {
       margin: 0;
-      background-color: #6A0D0D; 
+      background-color: #6A0D0D;
       font-family: 'Cairo', sans-serif;
       color: white;
       display: flex;
@@ -44,6 +54,7 @@
 
     .container {
       max-width: 500px;
+      padding: 20px;
     }
 
     h1 {
@@ -66,7 +77,7 @@
       display: inline-block;
       margin: 8px;
       padding: 12px 24px;
-      background: #C9A227; 
+      background: #C9A227;
       color: #6A0D0D;
       text-decoration: none;
       border-radius: 8px;
@@ -92,7 +103,7 @@
     <p>...جاري تحويلك لتحميل التطبيق</p>
 
     <div id="buttons">
-      <p>:اختر المتجر المناسب</p>
+      <p></p>:اختر المتجر المناسب</p>
       <a class="btn" href="https://play.google.com/store/apps/details?id=com.hidayaksa">Android</a>
       <a class="btn" href="https://apps.apple.com/us/app/%D9%82%D8%B1%D8%A2%D9%86-%D9%87%D8%AF%D8%A7%D9%8A%D8%A9-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9/id6745518467">iPhone</a>
     </div>
