@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <title>تحميل تطبيق هداية</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <script>
+    function redirectUser() {
+      var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+      var androidLink = "https://play.google.com/store/apps/details?id=com.hidayaksa";
+      var iosLink = "https://apps.apple.com/us/app/%D9%82%D8%B1%D8%A2%D9%86-%D9%87%D8%AF%D8%A7%D9%8A%D8%A9-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9/id6745518467";
+
+      // Android
+      if (/android/i.test(userAgent)) {
+        window.location.replace(androidLink);
+      }
+
+      // iOS
+      else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        window.location.replace(iosLink);
+      }
+
+      // Desktop fallback (يعرض أزرار اختيار)
+      else {
+        document.getElementById("buttons").style.display = "block";
+      }
+    }
+
+    window.onload = redirectUser;
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding-top: 60px;
+    }
+    .btn {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 20px;
+      background: #0b5ed7;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>جاري تحويلك لتحميل التطبيق...</h2>
+
+  <div id="buttons" style="display:none;">
+    <p>اختر المتجر المناسب:</p>
+    <a class="btn" href="https://play.google.com/store/apps/details?id=com.hidayaksa">Android</a>
+    <a class="btn" href="https://apps.apple.com/us/app/%D9%82%D8%B1%D8%A2%D9%86-%D9%87%D8%AF%D8%A7%D9%8A%D8%A9-%D8%A7%D9%84%D8%B3%D8%B9%D9%88%D8%AF%D9%8A%D8%A9/id6745518467">iPhone</a>
+  </div>
+</body>
+</html>
